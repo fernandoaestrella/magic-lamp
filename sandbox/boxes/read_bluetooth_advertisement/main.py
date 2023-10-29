@@ -8,6 +8,8 @@ Updated on 2019-03-25 by hbldh <henrik.blidh@nedomkull.com>
 
 """
 
+## I've been able to transmit 10 octals so far. I may be able to sneak some more bits in
+
 import argparse
 import asyncio
 
