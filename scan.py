@@ -27,7 +27,7 @@ if __name__ == "__main__":
     peripherals = adapter.scan_get_results()
     print("The following peripherals were found:")
     for peripheral in peripherals:
-        if peripheral.identifier() == "M":
+        if peripheral.identifier() == "z":
             connectable_str = "Connectable" if peripheral.is_connectable() else "Non-Connectable"
             print(f"{peripheral.identifier()} [{peripheral.address()}] - {connectable_str}")
             print(f'    Address Type: {peripheral.address_type()}')
@@ -43,14 +43,25 @@ if __name__ == "__main__":
                 print(f"    Service UUID: {service.uuid()}")
                 print(f"    Service data: {service.data()}")
             
-            print(type(service.data()))
-            integer_data = int.from_bytes(service.data(), byteorder='big')
-            binary_digits = bin(integer_data)[2:]
-            print(binary_digits)
-            print(binary_digits.__len__())
+            print("STRING: " + str(service.data()))
+            end = service.data().__len__() + 2
+            #print(bin(int(str(service.data().subs))))
+            print((str(service.data())[2:end]))
+            print(bin(int(str(service.data())[2:end])))
 
         """M [51:96:d4:f2:90:e5] - Non-Connectable
     Address Type: BluetoothAddressType.RANDOM
     Tx Power: -32768 dBm
     Service UUID: 0000fef3-0000-1000-8000-00805f9b34fb
-    Service data: b'2516655'"""
+    Service data: b'2516655'
+    
+    Service data: b'4194303'
+<class 'bytes'>
+110100001100010011100100110100001100110011000000110011
+
+always 7
+    Service data: b'7'
+<class 'bytes'>
+110111
+6
+    """
