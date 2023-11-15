@@ -7,7 +7,7 @@
 identification:
 1 bit for male/female
 1 bit for if at or taller than 5' 9" for men, or at or taller than 5'4" for women
-1 bit for if older than 47 for men, or if older than 32 for women
+1 bit for if older than 32 for men, or is older than 34 for women
 1 bit for facial hair if men, or hair at or above shoulder if woman
 1 bit for wearing glasses
 4 bits for 16 tshirt colors
