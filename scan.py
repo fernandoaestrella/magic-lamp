@@ -11,7 +11,8 @@ if __name__ == "__main__":
     for i, adapter in enumerate(adapters):
         print(f"{i}: {adapter.identifier()} [{adapter.address()}]")
 
-    choice = int(input("Enter choice: "))
+    #choice = int(input("Enter choice: "))
+    choice = 0
     adapter = adapters[choice]
 
     print(f"Selected adapter: {adapter.identifier()} [{adapter.address()}]")
@@ -26,17 +27,30 @@ if __name__ == "__main__":
     peripherals = adapter.scan_get_results()
     print("The following peripherals were found:")
     for peripheral in peripherals:
-        connectable_str = "Connectable" if peripheral.is_connectable() else "Non-Connectable"
-        print(f"{peripheral.identifier()} [{peripheral.address()}] - {connectable_str}")
-        print(f'    Address Type: {peripheral.address_type()}')
-        print(f'    Tx Power: {peripheral.tx_power()} dBm')
+        if peripheral.identifier() == "M":
+            connectable_str = "Connectable" if peripheral.is_connectable() else "Non-Connectable"
+            print(f"{peripheral.identifier()} [{peripheral.address()}] - {connectable_str}")
+            print(f'    Address Type: {peripheral.address_type()}')
+            print(f'    Tx Power: {peripheral.tx_power()} dBm')
 
-        manufacturer_data = peripheral.manufacturer_data()
-        for manufacturer_id, value in manufacturer_data.items():
-            print(f"    Manufacturer ID: {manufacturer_id}")
-            print(f"    Manufacturer data: {value}")
+            manufacturer_data = peripheral.manufacturer_data()
+            for manufacturer_id, value in manufacturer_data.items():
+                print(f"    Manufacturer ID: {manufacturer_id}")
+                print(f"    Manufacturer data: {value}")
 
-        services = peripheral.services()
-        for service in services:
-            print(f"    Service UUID: {service.uuid()}")
-            print(f"    Service data: {service.data()}")
+            services = peripheral.services()
+            for service in services:
+                print(f"    Service UUID: {service.uuid()}")
+                print(f"    Service data: {service.data()}")
+            
+            print(type(service.data()))
+            integer_data = int.from_bytes(service.data(), byteorder='big')
+            binary_digits = bin(integer_data)[2:]
+            print(binary_digits)
+            print(binary_digits.__len__())
+
+        """M [51:96:d4:f2:90:e5] - Non-Connectable
+    Address Type: BluetoothAddressType.RANDOM
+    Tx Power: -32768 dBm
+    Service UUID: 0000fef3-0000-1000-8000-00805f9b34fb
+    Service data: b'2516655'"""
