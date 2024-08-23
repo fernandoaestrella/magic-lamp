@@ -41,3 +41,36 @@ MAYBE
 UUID
 Universally Unique Identifier. It’s a 128-bit number to identify services, characteristics, and descriptors.
 YES
+
+BluetoothAdapter
+A representation of the Android device’s Bluetooth hardware. An instance of this class is provided by the BluetoothManager class. BluetoothAdapter provides information on the on/off state of the Bluetooth hardware, allows us to query for Bluetooth devices bonded to Android, and allows us to start BLE scans.
+YES
+
+BluetoothLeScanner
+Provided by the BluetoothAdapter class, this class allows us to start a BLE scan.
+Note: ACCESS_COARSE_LOCATION or ACCESS_FINE_LOCATION is required for BLE scans starting from Android M (6.0) and above, ACCESS_FINE_LOCATION is required for Android 10 and above, and BLUETOOTH_SCAN is required for Android 12 and above.
+YES, ALL
+
+ScanFilter
+It allows one to narrow down scan results to target specific devices we’re looking for during a BLE scan. A typical use case for apps is to filter BLE scan results based on the BLE devices’ advertised service UUIDs.
+YES, BY SERVICE UUID
+
+ScanResult
+It represents a BLE scan result obtained via BLE scan and contains information such as the BLE device’s MAC address, RSSI (signal strength), and advertisement data. The getDevice() method exposes the BluetoothDevice handle, which may contain the name of the BLE device and allows the app to connect to it.
+YES, ADVERTISEMENT DATA AND MAC ADDRESS AS UNIQUE IDENTIFIER
+
+BluetoothDevice
+Represents a physical Bluetooth (not specifically BLE) device that the app can connect to, bond (pair) with, or both. This class provides key information, including the device name, if it’s available, its MAC address, and its current bond state.
+NO
+
+BluetoothGatt
+An entry point to the BLE device’s GATT profile. It allows us to perform service discovery and connection teardown, request MTU updates (more on this later), and get access to the services and characteristics that are present on the BLE device. We can think of this as a handle to an established BLE connection.
+MAYBE, ONLY IF SERVICE DISCOVERY/SCAN FILTERING CAN ONLY BE DONE AFTER CONNECTING
+
+BluetoothGattService, BluetoothGattCharacteristic and BluetoothGattDescriptor
+Wrapper classes represent GATT services, characteristics, and descriptors, as defined in the Table of Glossary earlier in this guide.
+YES, SERVICE AND CHARACTERISTIC
+
+BluetoothGattCallback
+The app must implement the main interface to receive callbacks for most BluetoothGatt-related operations like reading, writing, or getting notified about incoming Notifications or Indications.
+YES
