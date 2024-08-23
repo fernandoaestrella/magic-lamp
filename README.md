@@ -100,3 +100,23 @@ Extra advertisement data in the ScanResult’s ScanRecord, accessed via getScanR
 ScanRecord conveniently parses out any manufacturer specific data and service data from the scan record and these can be accessed using the getManufacturerSpecificData(...) and getServiceData(...) methods.
 The raw scan record bytes can be accessed using the getBytes() method.
 YES
+
+Specifying Scan Settings
+Aside from scan results filtering, Android also allows us to specify the scan settings to use during scanning, represented by the ScanSettings class, which also comes with its own ScanSettings.Builder builder class. Here are a few practical and commonly used scan settings that Android allows us to tweak:
+
+Specify the desired BLE scan mode, from low-powered high-latency scans to high-powered low-latency scans.
+Most apps scanning in the foreground should use SCAN_MODE_BALANCED for scans that will last longer than 30 seconds.
+SCAN_MODE_LOW_LATENCY is recommended if the app only scans for a brief period, typically to find a very specific type of device.
+SCAN_MODE_LOW_POWER is used for extremely long-duration scans or scans that occur in the background (with the user’s permission). Note that the high latency nature of this low-power scan mode may result in missed advertisement packets if the device you’re scanning for has a high enough advertising interval that it doesn’t overlap with the app’s scan frequency.
+YES, LOW LATENCY
+
+Specify the callback type for the BLE advertisement packets that were encountered.
+Apps like LightBlue that require continuous updating of incoming advertisement packets should use CALLBACK_TYPE_ALL_MATCHES to get notified about all incoming packets. This is the default setting if an app doesn’t specify the desired callback type.
+CALLBACK_TYPE_FIRST_MATCH is used if an app is only concerned about getting a single callback for each device that matches the filter criteria specified by ScanFilter (or all devices in the vicinity if a ScanFilter wasn’t specified). 
+CALLBACK_TYPE_MATCH_LOST is a bit of an odd one — we’ve had mixed experience using this and don’t recommend it in general. You’re typically better off implementing a timer yourself that periodically goes through your list of ScanResults and removing outdated ones (e.g., haven’t been encountered in the last 10 seconds or so) based on ScanResult’s getTimestampNanos() method, but note that this method provides a timestamp since Android’s system boot time and not the time since Epoch time.
+YES, TRY CALLBACK_TYPE_ALL_MATCHES AND CALLBACK_TYPE_FIRST_MATCH
+
+Specify the threshold at which an advertisement packet sighting should be surfaced as a scan result.
+MATCH_MODE_STICKY is useful in filtering out advertising BLE devices that are too far away from the Android device since it requires a higher threshold of signal strength and number of sightings before that BLE device is surfaced as a scan result to our app.
+MATCH_MODE_AGGRESSIVE is the opposite of MATCH_MODE_STICKY and will show you every device advertising in the range of the BLE scanner, near or far.
+YES, MATCH_MODE_AGGRESSIVE
