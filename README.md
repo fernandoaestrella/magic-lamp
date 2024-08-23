@@ -74,3 +74,29 @@ YES, SERVICE AND CHARACTERISTIC
 BluetoothGattCallback
 The app must implement the main interface to receive callbacks for most BluetoothGatt-related operations like reading, writing, or getting notified about incoming Notifications or Indications.
 YES
+
+Parsing and Understanding Scan Results
+A ScanResult object gets surfaced as part of ScanCallback’s onScanResult(...) method, and generally the things we care about in a ScanResult are:
+
+The MAC address of the device that identifies the advertising scan results.
+Obtained via getDevice() followed by getAddress(), or simply device.address in Kotlin.
+Warning: a device implementing Bluetooth 4.2’s LE Privacy feature will randomize its public MAC address periodically, so a MAC address obtained via scanning should not generally be used as a long-term means to identify a device — unless the firmware guarantees that it’s not rotating MAC addresses, or if it has an out-of-band way to communicate what it’s current public MAC address is, or if the use case involves bonding, which would allow Android to derive the latest/current MAC address of the device.
+NO
+
+The name of the device that we can show to the user.
+Obtained via getDevice() followed by getName(), or simply device.name in Kotlin. Not all BLE devices advertise the device name, so some BLE devices’ names may be null.
+NO
+
+The RSSI or signal strength of the advertising BLE device, measured in dBm.
+Obtained via getRssi(), or simply rssi in Kotlin.
+Sorting scan results by descending order of signal strength is a good way to find the peripheral closest to the Android device, but it’s not a 100% guarantee because RSSI can be affected by the transmission power of the advertising device’s antenna, and other physical factors such as the presence of metallic objects around the Android or BLE device.
+The decibel values are oftentimes relative and not based on an absolute scale. This means that an RSSI reading of -42 dBm can be “close range” for one Android phone but “medium range” for another. It’s generally not recommended to universally map RSSI readings to real-world physical distances.
+NO
+
+The BluetoothDevice handle that we need in order to connect to the device, accessed via the getDevice() method.
+NO
+
+Extra advertisement data in the ScanResult’s ScanRecord, accessed via getScanRecord().
+ScanRecord conveniently parses out any manufacturer specific data and service data from the scan record and these can be accessed using the getManufacturerSpecificData(...) and getServiceData(...) methods.
+The raw scan record bytes can be accessed using the getBytes() method.
+YES
