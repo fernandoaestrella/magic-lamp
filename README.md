@@ -8,7 +8,7 @@ a tool to give and receive help in a structured manner
 4. Store your phone away
 5. When a match is found, your phone will notify you and you can look for the person based on the general identifying information that the other person shared, or peple may come to you based on the indenficating features you shared, and you can chat about how you can help each other based on what you have advertised
 
-Current plan:
+Current plan (from https://github.com/PunchThrough/ble-starter-android.git, which helps on the scanning part, but not on the advertising part. Using Bing Copilot for the advertising part):
 
 Central/Client
 A device that scans for and connects to BLE Peripherals to perform some operation. In the context of app development, this is typically an Android device.
