@@ -1,8 +1,8 @@
 Do you look like a man?
-Are you wearing glasses?
 Are you taller than [median height for aparent gender]?
 Are you older than [median age for aparent gender]?
 [For male-looking: "Do you have facial hair?"; for female-looking: "Does your hair reach below your shoulder?"]
+Are you wearing glasses?
 What color of your clothing occupies the most space ABOVE your hips?
 What color of your clothing occupies the most space BELOW your hips?
 
