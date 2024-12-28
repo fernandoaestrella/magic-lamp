@@ -1,0 +1,22 @@
+1. Do you look like a man?
+2. Are you taller than [median height for aparent gender]?
+3. Are you older than [median age for aparent gender]?
+4. [For male-looking: "Do you have facial hair?"; for female-looking: "Does your hair reach below your shoulder?"]
+5. Are you wearing glasses?
+6. What color of your clothing occupies the most space ABOVE your hips?
+7. What color of your clothing occupies the most space BELOW your hips?
+
+Average heights worldwide: (from https://datamax.org/average-height-of-men-and-women-across-the-world/) (tried to find median but couldn't)
+Men: 5 feet 9 inches (175 cm)
+Women: 5 feet 4 inches (162 cm)
+
+Median ages worldwide: (from https://www.cia.gov/the-world-factbook/field/median-age/)
+total: 31 years (2020 est.)
+male: 30.3 years
+female: 31.8 years
+
+Top colors:
+white,black,gray,brown,red,green,blue,purple,orange,yellow,none (oooh yeah!)
+
+Bottom colors:
+white,black,gray,brown,blue,none of the above (i.e. other colors),none (woohoo! go you!)
