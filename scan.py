@@ -91,7 +91,8 @@ if __name__ == "__main__":
     received_matches = {}
     for peripheral in peripherals:    
         # For all messages directed to this app
-        if peripheral.identifier() == "z":
+        if True:
+        # if peripheral.identifier() == "":
             # Save them in a dictionary
             
             """connectable_str = "Connectable" if peripheral.is_connectable() else "Non-Connectable"
