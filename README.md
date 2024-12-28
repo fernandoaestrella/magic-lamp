@@ -1,6 +1,6 @@
 # magic-lamp
 a tool to give and receive help in a structured manner
-
+testststttststst
 ## The gist of it
 1. Define what requests and offers you have out of 7 levels that map to each of the chakras. Toggle the corresponding selectors
 2. Identify yourself in very general terms by toggling certain selectors if appropriate, so people can visually find you
